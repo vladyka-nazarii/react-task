@@ -9,8 +9,8 @@ export class App extends Component {
     <>
       <HeaderWithRouter />
       <Routes>
-        <Route path="/" element={<div>Main Page</div>} />
-        <Route path="/about" element={<div>About Page</div>} />
+        <Route path="/" element={<div>Main</div>} />
+        <Route path="/about" element={<div>About</div>} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       <Footer />
