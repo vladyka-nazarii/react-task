@@ -1,0 +1,10 @@
+.about {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  font-size: 64px;
+}

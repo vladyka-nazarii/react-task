@@ -1,6 +1,6 @@
 .list {
   display: flex;
-  font-size: 26x;
+  font-size: 22px;
 }
 
 .item:active,
@@ -8,6 +8,7 @@
 .item {
   text-decoration: none;
   color: white;
+  padding: 10px;
 }
 
 .active:active,
@@ -15,4 +16,5 @@
 .active {
   text-decoration: none;
   color: green;
+  padding: 10px;
 }

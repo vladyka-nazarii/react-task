@@ -12,7 +12,7 @@ class Header extends Component<WithRouterProps> {
 
     return (
       <header className={styles.header}>
-        <h1 className={styles.title}>{title} Page </h1>
+        <h1 className={styles.title}>{title}</h1>
         <Nav />
       </header>
     );

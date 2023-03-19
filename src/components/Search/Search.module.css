@@ -1,0 +1,26 @@
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.searchWindow {
+  height: 40px;
+  width: 200px;
+  border-radius: 20px;
+  padding: 10px 40px 10px 10px;
+}
+
+.searchButton {
+  width: 40px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: -40px;
+}
+
+.searchImg {
+  width: 25px;
+  height: 25px;
+}

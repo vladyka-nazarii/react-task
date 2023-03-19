@@ -8,7 +8,7 @@ interface SearchState {
 
 export class Search extends Component {
   state: SearchState = {
-    value: '',
+    value: localStorage.getItem('search') || '',
   };
 
   componentDidMount = () => {
@@ -27,14 +27,14 @@ export class Search extends Component {
   render = () => (
     <div className={styles.search}>
       <input
-        type="search"
-        className={styles.searchTerm}
-        placeholder="Search"
+        type="text"
+        className={styles.searchWindow}
+        placeholder="Search Movie"
         value={this.state.value}
         onChange={this.handleInput}
       />
       <button type="submit" className={styles.searchButton}>
-        Search
+        <img className={styles.searchImg} src="./search.png" alt="search" />
       </button>
     </div>
   );
