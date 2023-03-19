@@ -1,0 +1,17 @@
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  padding: 10px 20px;
+}
+
+.img {
+  height: 40px;
+}
+
+.year {
+  font-size: 32px;
+  color: white;
+}

@@ -1,0 +1,18 @@
+.list {
+  display: flex;
+  font-size: 26x;
+}
+
+.item:active,
+.item:hover,
+.item {
+  text-decoration: none;
+  color: white;
+}
+
+.active:active,
+.active:hover,
+.active {
+  text-decoration: none;
+  color: green;
+}
