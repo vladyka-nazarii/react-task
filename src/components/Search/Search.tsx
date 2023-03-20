@@ -25,9 +25,9 @@ export class Search extends Component {
   };
 
   render = () => (
-    <div className={styles.search}>
+    <div className={styles.search} data-testid="search">
       <input
-        type="text"
+        type="search"
         className={styles.searchWindow}
         placeholder="Search Movie"
         value={this.state.value}
