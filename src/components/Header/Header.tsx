@@ -8,7 +8,22 @@ import styles from './Header.module.css';
 class Header extends Component<WithRouterProps> {
   render = () => {
     const { pathname } = this.props.location;
-    const title = pathname === '/' ? 'Main' : pathname === '/about' ? 'About' : 'Not Found';
+    let path = '';
+    switch (pathname) {
+      case '/':
+        path = 'Main';
+        break;
+      case '/forms':
+        path = 'Forms';
+        break;
+      case '/about':
+        path = 'About';
+        break;
+      default:
+        path = 'Not Found';
+        break;
+    }
+    const title = path;
 
     return (
       <header className={styles.header}>

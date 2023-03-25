@@ -10,6 +10,9 @@ export class Nav extends Component {
         <NavLink className={({ isActive }) => (isActive ? styles.active : styles.item)} to="/">
           Main
         </NavLink>
+        <NavLink className={({ isActive }) => (isActive ? styles.active : styles.item)} to="/forms">
+          Forms
+        </NavLink>
         <NavLink className={({ isActive }) => (isActive ? styles.active : styles.item)} to="/about">
           About
         </NavLink>
