@@ -26,3 +26,18 @@
 .input {
   width: 170px;
 }
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 32px;
+  color: rgb(8, 252, 8);
+  background-color: #00000099;
+}
