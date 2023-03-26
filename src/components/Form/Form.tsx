@@ -1,8 +1,14 @@
 import React, { Component, createRef } from 'react';
 
+import { IUser } from '../../interfaces/interfaces';
+
 import styles from './Form.module.css';
 
-export class Form extends Component {
+interface FormProps {
+  addUser: (user: IUser) => void;
+}
+
+export class Form extends Component<FormProps> {
   state = { message: false };
   form = createRef<HTMLFormElement>();
   name = createRef<HTMLInputElement>();
@@ -14,15 +20,16 @@ export class Form extends Component {
   agreement = createRef<HTMLInputElement>();
 
   handleSubmit = () => {
+    const { addUser } = this.props;
     const name = this.name.current?.value;
-    const birthday = this.birthday.current?.value;
+    const birthday = this.birthday.current?.valueAsDate;
     const gender =
       (this.male.current?.checked && this.male.current?.value) ||
       (this.female.current?.checked && this.female.current?.value);
     const country = this.country.current?.value;
     const file = this.file.current?.files?.[0];
     const agreement = this.agreement.current?.checked;
-    console.log(name, birthday, gender, country, file?.name, agreement);
+    addUser({ name, birthday, gender, country, file });
     this.setState({ message: true });
     this.form.current?.reset();
   };

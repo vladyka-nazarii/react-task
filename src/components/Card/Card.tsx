@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { ICard } from '../../interfaces/interface';
+import { ICard } from '../../interfaces/interfaces';
 import styles from './Card.module.css';
 
 interface CardProps {

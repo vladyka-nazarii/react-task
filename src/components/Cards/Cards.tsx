@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Card } from '../Card/Card';
-import { ICard } from '../../interfaces/interface';
+import { ICard } from '../../interfaces/interfaces';
 
 import styles from './Cards.module.css';
 import { data } from '../../assets/data';
