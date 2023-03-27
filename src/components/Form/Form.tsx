@@ -61,7 +61,7 @@ export class Form extends Component<FormProps> {
     const { status } = this.state;
     return (
       <>
-        <form className={styles.form} ref={this.form}>
+        <form className={styles.form} ref={this.form} name="form">
           <label className={styles.label}>
             <span className={styles.title}>Name:</span>
             <input className={styles.input} type="text" ref={this.name}></input>
@@ -102,7 +102,7 @@ export class Form extends Component<FormProps> {
           </label>
           <Validation error={this.state.validation.file} />
           <label className={styles.label}>
-            <input type="checkbox" ref={this.agreement}></input> I consent to my personal data
+            <input type="checkbox" ref={this.agreement}></input>I consent to my personal data
           </label>
           <Validation error={this.state.validation.agreement} />
           <button className={styles.button} type="button" onClick={this.handleSubmit}>
