@@ -2,6 +2,7 @@ import React, { Component, createRef } from 'react';
 
 import { validateFile, validateName, validateRequired } from '../../utils/validation';
 import { IFormState, IUser } from '../../interfaces/interfaces';
+import { Validation } from '../../components/Validation/Validation';
 
 import styles from './Form.module.css';
 
@@ -65,22 +66,12 @@ export class Form extends Component<FormProps> {
             <span className={styles.title}>Name:</span>
             <input className={styles.input} type="text" ref={this.name}></input>
           </label>
-          <p
-            className={styles.error}
-            style={this.state.validation.name ? { display: 'block' } : { display: 'none' }}
-          >
-            {this.state.validation.name}
-          </p>
+          <Validation error={this.state.validation.name} />
           <label className={styles.label}>
             <span className={styles.title}>Birthday:</span>
             <input className={styles.input} type="date" ref={this.birthday}></input>
           </label>
-          <p
-            className={styles.error}
-            style={this.state.validation.birthday ? { display: 'block' } : { display: 'none' }}
-          >
-            {this.state.validation.birthday}
-          </p>
+          <Validation error={this.state.validation.birthday} />
           <div className={styles.genderWrapper}>
             <span className={styles.title}>Gender:</span>
             <label className={styles.label}>
@@ -92,12 +83,7 @@ export class Form extends Component<FormProps> {
               <span className={styles.genderText}>Female</span>
             </label>
           </div>
-          <p
-            className={styles.error}
-            style={this.state.validation.gender ? { display: 'block' } : { display: 'none' }}
-          >
-            {this.state.validation.gender}
-          </p>
+          <Validation error={this.state.validation.gender} />
           <label className={styles.label}>
             <span className={styles.title}>Country:</span>
             <select className={styles.input} name="country" defaultValue="" ref={this.country}>
@@ -109,31 +95,16 @@ export class Form extends Component<FormProps> {
               <option value="Russia">Russia</option>
             </select>
           </label>
-          <p
-            className={styles.error}
-            style={this.state.validation.country ? { display: 'block' } : { display: 'none' }}
-          >
-            {this.state.validation.country}
-          </p>
+          <Validation error={this.state.validation.country} />
           <label className={styles.label}>
             <span className={styles.title}>Avatar:</span>
             <input className={styles.input} type="file" ref={this.file}></input>
           </label>
-          <p
-            className={styles.error}
-            style={this.state.validation.file ? { display: 'block' } : { display: 'none' }}
-          >
-            {this.state.validation.file}
-          </p>
+          <Validation error={this.state.validation.file} />
           <label className={styles.label}>
             <input type="checkbox" ref={this.agreement}></input> I consent to my personal data
           </label>
-          <p
-            className={styles.error}
-            style={this.state.validation.agreement ? { display: 'block' } : { display: 'none' }}
-          >
-            {this.state.validation.agreement}
-          </p>
+          <Validation error={this.state.validation.agreement} />
           <button className={styles.button} type="button" onClick={this.handleSubmit}>
             Add User
           </button>
