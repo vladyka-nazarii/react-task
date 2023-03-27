@@ -98,7 +98,12 @@ export class Form extends Component<FormProps> {
           <Validation error={this.state.validation.country} />
           <label className={styles.label}>
             <span className={styles.title}>Avatar:</span>
-            <input className={styles.input} type="file" ref={this.file}></input>
+            <input
+              className={styles.input}
+              type="file"
+              accept="image/png, image/jpeg"
+              ref={this.file}
+            ></input>
           </label>
           <Validation error={this.state.validation.file} />
           <label className={styles.label}>
