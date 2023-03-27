@@ -15,3 +15,17 @@ export interface IUser {
   country: string | undefined;
   file: Blob | undefined;
 }
+
+export interface IFormState {
+  status: boolean;
+  validation: IValidation;
+}
+
+export interface IValidation {
+  name: string | null;
+  birthday: string | null;
+  gender: string | null;
+  country: string | null;
+  file: string | null;
+  agreement: string | null;
+}

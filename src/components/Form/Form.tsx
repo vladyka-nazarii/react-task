@@ -1,6 +1,7 @@
 import React, { Component, createRef } from 'react';
 
-import { IUser } from '../../interfaces/interfaces';
+import { validateFile, validateName, validateRequired } from '../../utils/validation';
+import { IFormState, IUser } from '../../interfaces/interfaces';
 
 import styles from './Form.module.css';
 
@@ -9,7 +10,17 @@ interface FormProps {
 }
 
 export class Form extends Component<FormProps> {
-  state = { message: false };
+  state: IFormState = {
+    status: false,
+    validation: {
+      name: null,
+      birthday: null,
+      gender: null,
+      country: null,
+      file: null,
+      agreement: null,
+    },
+  };
   form = createRef<HTMLFormElement>();
   name = createRef<HTMLInputElement>();
   birthday = createRef<HTMLInputElement>();
@@ -29,13 +40,24 @@ export class Form extends Component<FormProps> {
     const country = this.country.current?.value;
     const file = this.file.current?.files?.[0];
     const agreement = this.agreement.current?.checked;
-    addUser({ name, birthday, gender, country, file });
-    this.setState({ message: true });
-    this.form.current?.reset();
+    const errors = [
+      validateName(name, this),
+      validateRequired(birthday, 'birthday', this),
+      validateRequired(gender, 'gender', this),
+      validateRequired(country, 'country', this),
+      validateFile(file, this),
+      validateRequired(agreement, 'agreement', this),
+    ].includes(true);
+
+    if (!errors) {
+      addUser({ name, birthday, gender, country, file });
+      this.setState({ status: true });
+      this.form.current?.reset();
+    }
   };
 
   render = () => {
-    const { message } = this.state;
+    const { status } = this.state;
     return (
       <>
         <form className={styles.form} ref={this.form}>
@@ -43,10 +65,22 @@ export class Form extends Component<FormProps> {
             <span className={styles.title}>Name:</span>
             <input className={styles.input} type="text" ref={this.name}></input>
           </label>
+          <p
+            className={styles.error}
+            style={this.state.validation.name ? { display: 'block' } : { display: 'none' }}
+          >
+            {this.state.validation.name}
+          </p>
           <label className={styles.label}>
             <span className={styles.title}>Birthday:</span>
             <input className={styles.input} type="date" ref={this.birthday}></input>
           </label>
+          <p
+            className={styles.error}
+            style={this.state.validation.birthday ? { display: 'block' } : { display: 'none' }}
+          >
+            {this.state.validation.birthday}
+          </p>
           <div className={styles.genderWrapper}>
             <span className={styles.title}>Gender:</span>
             <label className={styles.label}>
@@ -58,6 +92,12 @@ export class Form extends Component<FormProps> {
               <span className={styles.genderText}>Female</span>
             </label>
           </div>
+          <p
+            className={styles.error}
+            style={this.state.validation.gender ? { display: 'block' } : { display: 'none' }}
+          >
+            {this.state.validation.gender}
+          </p>
           <label className={styles.label}>
             <span className={styles.title}>Country:</span>
             <select className={styles.input} name="country" defaultValue="" ref={this.country}>
@@ -69,19 +109,37 @@ export class Form extends Component<FormProps> {
               <option value="Russia">Russia</option>
             </select>
           </label>
+          <p
+            className={styles.error}
+            style={this.state.validation.country ? { display: 'block' } : { display: 'none' }}
+          >
+            {this.state.validation.country}
+          </p>
           <label className={styles.label}>
             <span className={styles.title}>Avatar:</span>
             <input className={styles.input} type="file" ref={this.file}></input>
           </label>
+          <p
+            className={styles.error}
+            style={this.state.validation.file ? { display: 'block' } : { display: 'none' }}
+          >
+            {this.state.validation.file}
+          </p>
           <label className={styles.label}>
             <input type="checkbox" ref={this.agreement}></input> I consent to my personal data
           </label>
+          <p
+            className={styles.error}
+            style={this.state.validation.agreement ? { display: 'block' } : { display: 'none' }}
+          >
+            {this.state.validation.agreement}
+          </p>
           <button className={styles.button} type="button" onClick={this.handleSubmit}>
             Add User
           </button>
         </form>
-        {message && (
-          <div className={styles.modal} onClick={() => this.setState({ message: false })}>
+        {status && (
+          <div className={styles.modal} onClick={() => this.setState({ status: false })}>
             <p>User has been successfully added!</p>
           </div>
         )}
