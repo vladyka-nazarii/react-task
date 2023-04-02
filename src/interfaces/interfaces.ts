@@ -13,7 +13,8 @@ export interface IUser {
   birthday: Date | null | undefined;
   gender: string | false | undefined;
   country: string | undefined;
-  file: Blob | undefined;
+  file: FileList | undefined;
+  agreement: boolean;
 }
 
 export interface IFormState {

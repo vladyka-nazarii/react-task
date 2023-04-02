@@ -9,7 +9,7 @@ interface IUserProps {
 }
 
 export const User = memo(({ user: { name, birthday, gender, country, file } }: IUserProps) => {
-  const imgSrc = file ? URL.createObjectURL(file) : '';
+  const imgSrc = file ? URL.createObjectURL(file[0]) : '';
 
   return (
     <article className={styles.wrapper}>
