@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { Form } from '../../components/Form/Form';
 import { Users } from '../../components/Users/Users';
@@ -6,23 +6,17 @@ import { IUser } from '../../interfaces/interfaces';
 
 import styles from './Forms.module.css';
 
-interface IFormsState {
-  users: IUser[];
-}
+export const Forms = () => {
+  const [users, setUsers] = useState<IUser[]>([]);
 
-export class Forms extends Component {
-  state: IFormsState = {
-    users: [],
+  const addUser = (user: IUser) => {
+    setUsers([...users, user]);
   };
 
-  addUser = (user: IUser) => {
-    this.setState({ users: [...this.state.users, user] });
-  };
-
-  render = () => (
+  return (
     <div className={styles.forms}>
-      <Form addUser={this.addUser} />
-      <Users users={this.state.users} />
+      <Form addUser={addUser} />
+      <Users users={users} />
     </div>
   );
-}
+};

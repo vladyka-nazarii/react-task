@@ -1,19 +1,13 @@
-import React, { Component } from 'react';
+import React, { memo } from 'react';
 
 import styles from './Validation.module.css';
 
-interface ValidationProps {
+interface IValidationProps {
   error: string | null;
 }
 
-export class Validation extends Component<ValidationProps> {
-  render = () => {
-    const error = this.props.error;
-
-    return (
-      <p className={styles.error} style={error ? { display: 'block' } : { display: 'none' }}>
-        {error}
-      </p>
-    );
-  };
-}
+export const Validation = memo(({ error }: IValidationProps) => (
+  <p className={styles.error} style={error ? { display: 'block' } : { display: 'none' }}>
+    {error}
+  </p>
+));

@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "eslint && tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest",
-    "coverage": "vitest run --coverage",
+    "test": "vitest --coverage",
     "prepare": "husky install",
     "lint": "eslint . --ext .tsx --ext .ts",
     "lint-fix": "eslint . --ext .tsx --ext .ts --fix"

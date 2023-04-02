@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { Card } from '../Card/Card';
 import { ICard } from '../../interfaces/interfaces';
@@ -6,26 +6,19 @@ import { ICard } from '../../interfaces/interfaces';
 import styles from './Cards.module.css';
 import { data } from '../../assets/data';
 
-interface CardsState {
-  cards: ICard[];
-}
+export const Cards = () => {
+  const [cards, setCards] = useState<ICard[]>([]);
 
-export class Cards extends Component {
-  state: CardsState = {
-    cards: [],
-  };
+  useEffect(() => setCards(data), []);
 
-  componentDidMount = () => {
-    this.setState({ cards: data });
-  };
+  const cardsLayout = useMemo(
+    () => cards.map((card) => <Card key={card.id} card={card} />),
+    [cards]
+  );
 
-  render = () => {
-    const cardsLayout = this.state.cards.map((card) => <Card key={card.id} card={card} />);
-
-    return (
-      <div className={styles.wrapper} data-testid="cards">
-        {cardsLayout}
-      </div>
-    );
-  };
-}
+  return (
+    <div className={styles.wrapper} data-testid="cards">
+      {cardsLayout}
+    </div>
+  );
+};

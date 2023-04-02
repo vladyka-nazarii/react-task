@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
+import React, { memo, useMemo } from 'react';
 
 import { IUser } from '../../interfaces/interfaces';
 import { User } from '../User/User';
 
 import styles from './Users.module.css';
 
-interface UsersProps {
+interface IUsersProps {
   users: IUser[];
 }
 
-export class Users extends Component<UsersProps> {
-  render = () => {
-    const usersLayout = this.props.users.map((user, index) => <User user={user} key={index} />);
+export const Users = memo(({ users }: IUsersProps) => {
+  const usersLayout = useMemo(
+    () => users.map((user, index) => <User user={user} key={index} />),
+    [users]
+  );
 
-    return <div className={styles.wrapper}>{usersLayout}</div>;
-  };
-}
+  return <div className={styles.wrapper}>{usersLayout}</div>;
+});
