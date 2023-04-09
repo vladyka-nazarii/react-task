@@ -30,13 +30,13 @@ export const Modal = memo(({ activeCard, setActiveCard }: IModalProps) => {
           </section>
           <h3 className={styles.name}>{title || 'No Title'}</h3>
           <section className={styles.mainInfo}>
-            <p className={styles.year}>
+            <p>
               Owner: <strong>{owner}</strong>
             </p>
-            <p className={styles.genre}>
+            <p>
               Height: <strong>{height}</strong>
             </p>
-            <p className={styles.year}>
+            <p>
               Width: <strong>{width}</strong>
             </p>
             <p className={styles.url}>

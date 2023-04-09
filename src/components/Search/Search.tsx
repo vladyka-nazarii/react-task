@@ -3,8 +3,8 @@ import React, { KeyboardEvent, memo, useCallback, useEffect, useRef } from 'reac
 import styles from './Search.module.css';
 
 interface ISearchProps {
-  search: string | null;
-  setSearch: React.Dispatch<React.SetStateAction<string | null>>;
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
   setIsPending: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -45,7 +45,7 @@ export const Search = memo(({ search, setSearch, setIsPending }: ISearchProps) =
       localStorage.setItem('search', search?.value || '');
       window.removeEventListener('beforeunload', clearLocalStorage);
     };
-  }, [handleSubmit]);
+  }, [handleSubmit, setIsPending, setSearch]);
 
   return (
     <div className={styles.search} data-testid="search">
