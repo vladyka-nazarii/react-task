@@ -9,12 +9,13 @@ interface ICardsProps {
   search: string | null;
   isPending: boolean;
   setIsPending: React.Dispatch<React.SetStateAction<boolean>>;
+  setActiveCard: React.Dispatch<React.SetStateAction<ICard | null>>;
 }
 
-export const Cards = memo(({ search, isPending, setIsPending }: ICardsProps) => {
+export const Cards = memo(({ search, isPending, setIsPending, setActiveCard }: ICardsProps) => {
   const [cards, setCards] = useState<ICard[]>([]);
   const FLICKR_URL =
-    'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=43de05dd9651aa75b4427038136f4a0f&extras=url_s&format=json&nojsoncallback=1&tags=';
+    'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=43de05dd9651aa75b4427038136f4a0f&extras=url_m&format=json&nojsoncallback=1&per_page=40&privacy_filter=1&tags=';
 
   useEffect(() => {
     if (search) {
@@ -46,7 +47,7 @@ export const Cards = memo(({ search, isPending, setIsPending }: ICardsProps) => 
       ) : cards.length === 0 ? (
         <div className={styles.loader}>Images Not Found</div>
       ) : (
-        cards.map((card) => <Card key={card.id} card={card} />)
+        cards.map((card) => <Card key={card.id} card={card} setActiveCard={setActiveCard} />)
       )}
     </div>
   );

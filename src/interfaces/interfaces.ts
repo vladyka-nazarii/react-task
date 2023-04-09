@@ -1,6 +1,6 @@
 export interface ICard {
   farm: number;
-  height_s: number;
+  height_m: number;
   id: string;
   isfamily: number;
   isfriend: number;
@@ -9,8 +9,8 @@ export interface ICard {
   secret: string;
   server: string;
   title: string;
-  url_s: string;
-  width_s: number;
+  url_m: string;
+  width_m: number;
 }
 
 export interface IUser {

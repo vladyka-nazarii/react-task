@@ -5,11 +5,14 @@ import styles from './Card.module.css';
 
 interface ICardProps {
   card: ICard;
+  setActiveCard: React.Dispatch<React.SetStateAction<ICard | null>>;
 }
 
-export const Card = memo(
-  ({ card: { title, height_s: height, width_s: width, url_s: url } }: ICardProps) => (
-    <article className={styles.wrapper}>
+export const Card = memo(({ card, setActiveCard }: ICardProps) => {
+  const { title, height_m: height, width_m: width, url_m: url } = card;
+
+  return (
+    <article className={styles.wrapper} onClick={() => setActiveCard(card)}>
       <section className={styles.imgWrapper}>
         <img className={styles.img} src={url} alt={title}></img>
       </section>
@@ -23,5 +26,5 @@ export const Card = memo(
         </p>
       </section>
     </article>
-  )
-);
+  );
+});
