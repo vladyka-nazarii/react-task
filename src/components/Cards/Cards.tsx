@@ -1,24 +1,53 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 
 import { Card } from '../Card/Card';
-import { ICard } from '../../interfaces/interfaces';
+import { ICard, IData } from '../../interfaces/interfaces';
 
 import styles from './Cards.module.css';
-import { data } from '../../assets/data';
 
-export const Cards = () => {
+interface ICardsProps {
+  search: string | null;
+  isPending: boolean;
+  setIsPending: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const Cards = memo(({ search, isPending, setIsPending }: ICardsProps) => {
   const [cards, setCards] = useState<ICard[]>([]);
+  const FLICKR_URL =
+    'https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=43de05dd9651aa75b4427038136f4a0f&extras=url_s&format=json&nojsoncallback=1&tags=';
 
-  useEffect(() => setCards(data), []);
-
-  const cardsLayout = useMemo(
-    () => cards.map((card) => <Card key={card.id} card={card} />),
-    [cards]
-  );
+  useEffect(() => {
+    if (search) {
+      fetch(FLICKR_URL + search)
+        .then((response) => response.json())
+        .then((data: IData) => {
+          setCards(data.photos.photo);
+          setIsPending(false);
+        });
+    } else {
+      setCards([]);
+    }
+  }, [search, setIsPending]);
 
   return (
     <div className={styles.wrapper} data-testid="cards">
-      {cardsLayout}
+      {isPending ? (
+        <div>
+          <div className={styles.loader}>
+            <div className={styles.ldsRing}>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <p>Progressing...</p>
+          </div>
+        </div>
+      ) : cards.length === 0 ? (
+        <div className={styles.loader}>Images Not Found</div>
+      ) : (
+        cards.map((card) => <Card key={card.id} card={card} />)
+      )}
     </div>
   );
-};
+});

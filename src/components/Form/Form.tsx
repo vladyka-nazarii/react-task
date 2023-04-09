@@ -29,7 +29,6 @@ export const Form = memo(({ addUser }: IFormProps) => {
   const onSubmit = handleSubmit((data) => {
     setStatus(true);
     addUser(data);
-    console.log(data.birthday);
   });
 
   useEffect(() => {

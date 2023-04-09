@@ -1,11 +1,16 @@
 export interface ICard {
-  id: number;
-  name: string;
-  genre: string;
-  year: number;
-  description: string;
-  image: string;
-  rating: number;
+  farm: number;
+  height_s: number;
+  id: string;
+  isfamily: number;
+  isfriend: number;
+  ispublic: number;
+  owner: string;
+  secret: string;
+  server: string;
+  title: string;
+  url_s: string;
+  width_s: number;
 }
 
 export interface IUser {
@@ -29,4 +34,13 @@ export interface IValidation {
   country: string | null;
   file: string | null;
   agreement: string | null;
+}
+export interface IData {
+  photos: {
+    page: number;
+    pages: number;
+    photo: ICard[];
+    total: number;
+  };
+  stat: 'ok' | 'fail';
 }

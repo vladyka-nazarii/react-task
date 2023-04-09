@@ -8,24 +8,20 @@ interface ICardProps {
 }
 
 export const Card = memo(
-  ({ card: { name, genre, year, description, image, rating } }: ICardProps) => (
+  ({ card: { title, height_s: height, width_s: width, url_s: url } }: ICardProps) => (
     <article className={styles.wrapper}>
       <section className={styles.imgWrapper}>
-        <img className={styles.img} src={image} alt={name}></img>
+        <img className={styles.img} src={url} alt={title}></img>
       </section>
-      <h3 className={styles.name}>{name}</h3>
+      <h3 className={styles.name}>{title ? title : <i>No Title</i>}</h3>
       <section className={styles.mainInfo}>
-        <p className={styles.genre}>
-          Genre: <strong>{genre}</strong>
-        </p>
         <p className={styles.year}>
-          Year: <strong>{year}</strong>
-        </p>
-        <p className={styles.year}>
-          Rating: <strong>{rating}</strong>
+          <span>Size: </span>
+          <strong>
+            {height} x {width}
+          </strong>
         </p>
       </section>
-      <section className={styles.description}>{description}</section>
     </article>
   )
 );
