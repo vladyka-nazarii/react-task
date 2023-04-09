@@ -44,3 +44,13 @@ export interface IData {
   };
   stat: 'ok' | 'fail';
 }
+
+export interface IFetchProps {
+  search: string | null;
+  setIsPending: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface ICardsProps extends IFetchProps {
+  isPending: boolean;
+  setActiveCard: React.Dispatch<React.SetStateAction<ICard | null>>;
+}
