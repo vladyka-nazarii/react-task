@@ -8,7 +8,7 @@ import { ICard } from 'interfaces/interfaces';
 import { Modal } from '../../components/Modal/Modal';
 
 export const Main = () => {
-  const [search, setSearch] = useState<string>('picture');
+  const [search, setSearch] = useState<string>(localStorage.getItem('search') || 'picture');
   const [isPending, setIsPending] = useState<boolean>(true);
   const [activeCard, setActiveCard] = useState<ICard | null>(null);
 
