@@ -2,13 +2,13 @@ import React, { KeyboardEvent, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Search.module.css';
-import { rootState } from '../../interfaces/interfaces';
+import { IRootState } from '../../interfaces/interfaces';
 import { updateSearchValue } from '../../redux/slice/searchSlice';
 
 export const Search = () => {
   const dispatch = useDispatch();
   const searchRef = useRef<HTMLInputElement>(null);
-  const search = useSelector((state: rootState) => state.search.search);
+  const search = useSelector((state: IRootState) => state.search.search);
 
   const handleSubmit = () => {
     dispatch(updateSearchValue(searchRef.current?.value || ''));

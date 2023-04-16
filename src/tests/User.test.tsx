@@ -12,6 +12,7 @@ describe('User component', () => {
     gender: 'Male',
     country: 'Ukraine',
     file: undefined,
+    agreement: true,
   };
 
   it('Should render name', () => {
