@@ -1,13 +1,8 @@
 import React, { MouseEventHandler, memo } from 'react';
 
-import { ICard } from '../../interfaces/interfaces';
+import { IModalProps } from '../../interfaces/interfaces';
 
 import styles from './Modal.module.css';
-
-interface IModalProps {
-  activeCard: ICard | null;
-  setActiveCard: React.Dispatch<React.SetStateAction<ICard | null>>;
-}
 
 export const Modal = memo(({ activeCard, setActiveCard }: IModalProps) => {
   const handleClose: MouseEventHandler<HTMLDivElement> = (event) => {

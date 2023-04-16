@@ -1,18 +1,17 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { validateFile, validateName, validateRequired } from '../../utils/validation';
+import { validateDate, validateFile, validateName, validateRequired } from '../../utils/validation';
 import { IUser } from '../../interfaces/interfaces';
 import { Validation } from '../../components/Validation/Validation';
 
 import styles from './Form.module.css';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../../redux/slice/usersSlice';
 
-interface IFormProps {
-  addUser: (user: IUser) => void;
-}
-
-export const Form = memo(({ addUser }: IFormProps) => {
+export const Form = () => {
   const [status, setStatus] = useState(false);
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -28,7 +27,7 @@ export const Form = memo(({ addUser }: IFormProps) => {
 
   const onSubmit = handleSubmit((data) => {
     setStatus(true);
-    addUser(data);
+    dispatch(addUser(data));
   });
 
   useEffect(() => {
@@ -40,29 +39,22 @@ export const Form = memo(({ addUser }: IFormProps) => {
       <form className={styles.form} name="form" onSubmit={onSubmit}>
         <label className={styles.label}>
           <span className={styles.title}>Name:</span>
-          <input className={styles.input} type="text" {...register('name', validateName)}></input>
+          <input className={styles.input} type="text" {...register('name', validateName)} />
         </label>
         <Validation error={errors.name} />
         <label className={styles.label}>
           <span className={styles.title}>Birthday:</span>
-          <input
-            className={styles.input}
-            type="date"
-            {...register('birthday', {
-              valueAsDate: true,
-              ...validateRequired,
-            })}
-          ></input>
+          <input className={styles.input} type="date" {...register('birthday', validateDate)} />
         </label>
         <Validation error={errors.birthday} />
         <div className={styles.genderWrapper}>
           <span className={styles.title}>Gender:</span>
           <label className={styles.label}>
-            <input type="radio" value="Male" {...register('gender', validateRequired)}></input>
+            <input type="radio" value="Male" {...register('gender', validateRequired)} />
             <span className={styles.genderText}>Male</span>
           </label>
           <label className={styles.label}>
-            <input type="radio" value="Female" {...register('gender', validateRequired)}></input>
+            <input type="radio" value="Female" {...register('gender', validateRequired)} />
             <span className={styles.genderText}>Female</span>
           </label>
         </div>
@@ -90,12 +82,12 @@ export const Form = memo(({ addUser }: IFormProps) => {
             type="file"
             accept="image/png, image/jpeg"
             {...register('file', validateFile)}
-          ></input>
+          />
         </label>
         <Validation error={errors.file} />
         <label className={styles.label}>
-          <input type="checkbox" {...register('agreement', validateRequired)}></input>I consent to
-          my personal data
+          <input type="checkbox" {...register('agreement', validateRequired)} />I consent to my
+          personal data
         </label>
         <Validation error={errors.agreement} />
         <button className={styles.button} type="submit">
@@ -109,4 +101,4 @@ export const Form = memo(({ addUser }: IFormProps) => {
       )}
     </>
   );
-});
+};

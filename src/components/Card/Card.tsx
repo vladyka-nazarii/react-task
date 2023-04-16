@@ -1,12 +1,7 @@
 import React, { memo } from 'react';
 
-import { ICard } from '../../interfaces/interfaces';
+import { ICardProps } from '../../interfaces/interfaces';
 import styles from './Card.module.css';
-
-interface ICardProps {
-  card: ICard;
-  setActiveCard: React.Dispatch<React.SetStateAction<ICard | null>>;
-}
 
 export const Card = memo(({ card, setActiveCard }: ICardProps) => {
   const { title, height_m: height, width_m: width, url_m: url } = card;

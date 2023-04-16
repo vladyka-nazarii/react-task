@@ -1,17 +1,17 @@
 import React, { memo } from 'react';
 
 import { Card } from '../Card/Card';
+import { useFetch } from '../../hooks/useFetch';
 import { ICardsProps } from '../../interfaces/interfaces';
 
 import styles from './Cards.module.css';
-import { useFetch } from '../../utils/useFetch';
 
-export const Cards = memo(({ search, isPending, setIsPending, setActiveCard }: ICardsProps) => {
-  const { cards, error } = useFetch({ search, setIsPending });
+export const Cards = memo(({ setActiveCard }: ICardsProps) => {
+  const { cards, isFetching, isError } = useFetch();
 
   return (
     <div className={styles.wrapper} data-testid="cards">
-      {isPending ? (
+      {isFetching ? (
         <div>
           <div className={styles.loader}>
             <div className={styles.ldsRing}>
@@ -24,7 +24,7 @@ export const Cards = memo(({ search, isPending, setIsPending, setActiveCard }: I
           </div>
         </div>
       ) : cards.length === 0 ? (
-        <div className={styles.loader}>{error ? error : 'Images Not Found'}</div>
+        <div className={styles.loader}>{isError && 'Error! Wrong reqest parameters!'}</div>
       ) : (
         cards.map((card) => <Card key={card.id} card={card} setActiveCard={setActiveCard} />)
       )}

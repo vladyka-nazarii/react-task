@@ -10,6 +10,15 @@ export const validateName = {
   },
 };
 
+export const validateDate = {
+  required: 'Required field!',
+  valueAsDate: true,
+  validate: {
+    require: (value: Date | null | undefined) =>
+      (value && value < new Date()) || 'Date cannot be in the future!',
+  },
+};
+
 export const validateRequired = {
   required: 'Required field!',
 };

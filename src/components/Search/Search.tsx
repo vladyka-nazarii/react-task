@@ -1,26 +1,18 @@
-import React, { KeyboardEvent, memo, useCallback, useEffect, useRef } from 'react';
+import React, { KeyboardEvent, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Search.module.css';
+import { rootState } from '../../interfaces/interfaces';
+import { updateSearchValue } from '../../redux/slice/searchSlice';
 
-interface ISearchProps {
-  search: string;
-  setSearch: React.Dispatch<React.SetStateAction<string>>;
-  setIsPending: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const Search = memo(({ search, setSearch, setIsPending }: ISearchProps) => {
+export const Search = () => {
+  const dispatch = useDispatch();
   const searchRef = useRef<HTMLInputElement>(null);
+  const search = useSelector((state: rootState) => state.search.search);
 
-  const handleSubmit = useCallback(() => {
-    const searchValue = searchRef.current?.value;
-    if (searchValue && searchValue !== search) {
-      setSearch(searchValue);
-      setIsPending(true);
-    }
-    if (searchValue === '') {
-      setSearch(searchValue);
-    }
-  }, [search, setIsPending, setSearch]);
+  const handleSubmit = () => {
+    dispatch(updateSearchValue(searchRef.current?.value || ''));
+  };
 
   const handleEnter = (event: KeyboardEvent) => {
     if (event.key === 'Enter') {
@@ -28,24 +20,13 @@ export const Search = memo(({ search, setSearch, setIsPending }: ISearchProps) =
     }
   };
 
-  const clearLocalStorage = () => localStorage.removeItem('search');
-
   useEffect(() => {
-    const search = searchRef.current;
-    window.addEventListener('beforeunload', clearLocalStorage);
+    const current = searchRef.current;
 
-    if (search) {
-      search.value = localStorage.getItem('search') || '';
-      if (search.value) {
-        handleSubmit();
-      }
+    if (current) {
+      current.value = search;
     }
-
-    return () => {
-      localStorage.setItem('search', search?.value || '');
-      window.removeEventListener('beforeunload', clearLocalStorage);
-    };
-  }, [handleSubmit, setIsPending, setSearch]);
+  }, [search]);
 
   return (
     <div className={styles.search} data-testid="search">
@@ -61,4 +42,4 @@ export const Search = memo(({ search, setSearch, setIsPending }: ISearchProps) =
       </button>
     </div>
   );
-});
+};
