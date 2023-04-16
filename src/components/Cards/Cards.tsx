@@ -7,7 +7,7 @@ import { ICardsProps } from '../../interfaces/interfaces';
 import styles from './Cards.module.css';
 
 export const Cards = memo(({ setActiveCard }: ICardsProps) => {
-  const { cards, isFetching, isError } = useFetch();
+  const { cards, isFetching, message } = useFetch();
 
   return (
     <div className={styles.wrapper} data-testid="cards">
@@ -24,7 +24,7 @@ export const Cards = memo(({ setActiveCard }: ICardsProps) => {
           </div>
         </div>
       ) : cards.length === 0 ? (
-        <div className={styles.loader}>{isError && 'Error! Wrong reqest parameters!'}</div>
+        <div className={styles.loader}>{message ? message : 'Images Not Found'}</div>
       ) : (
         cards.map((card) => <Card key={card.id} card={card} setActiveCard={setActiveCard} />)
       )}

@@ -45,6 +45,8 @@ export interface IData {
     total: number;
   };
   stat: 'ok' | 'fail';
+  code?: number;
+  message?: string;
 }
 
 export interface IFetchProps {
