@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { validateDate, validateFile, validateName, validateRequired } from '../../utils/validation';
-import { IUser } from '../../interfaces/interfaces';
+import { IUser, IUserForm } from '../../interfaces/interfaces';
 import { Validation } from '../../components/Validation/Validation';
 
 import styles from './Form.module.css';
@@ -18,7 +18,7 @@ export const Form = () => {
     reset,
     handleSubmit,
     formState: { isSubmitSuccessful, errors },
-  } = useForm<IUser>({
+  } = useForm<IUserForm>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     shouldFocusError: false,
@@ -26,8 +26,16 @@ export const Form = () => {
   });
 
   const onSubmit = handleSubmit((data) => {
-    setStatus(true);
-    dispatch(addUser(data));
+    if (data.file) {
+      setStatus(true);
+      dispatch(
+        addUser({
+          ...data,
+          birthday: new Intl.DateTimeFormat().format(data.birthday || undefined),
+          file: URL.createObjectURL(data.file[0]),
+        })
+      );
+    }
   });
 
   useEffect(() => {

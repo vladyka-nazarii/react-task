@@ -15,13 +15,21 @@ export interface ICard {
   width_m: number;
 }
 
-export interface IUser {
+export interface IUserForm {
   name: string | undefined;
   birthday: Date | null | undefined;
   gender: string | false | undefined;
   country: string | undefined;
   file: FileList | undefined;
   agreement: boolean;
+}
+
+export interface IUser {
+  name: string | undefined;
+  birthday: string;
+  gender: string | false | undefined;
+  country: string | undefined;
+  file: string | undefined;
 }
 
 export interface IFormState {
