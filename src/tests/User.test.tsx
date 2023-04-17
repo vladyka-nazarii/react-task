@@ -8,11 +8,10 @@ import { IUser } from '../interfaces/interfaces';
 describe('User component', () => {
   const user: IUser = {
     name: 'Nazar',
-    birthday: new Date(),
+    birthday: new Intl.DateTimeFormat().format(new Date()),
     gender: 'Male',
     country: 'Ukraine',
     file: undefined,
-    agreement: true,
   };
 
   it('Should render name', () => {
@@ -27,11 +26,7 @@ describe('User component', () => {
 
   it('Should renders the user birthday', () => {
     render(<User user={user} />);
-    expect(
-      screen.getByText(
-        `Birthday: ${user.birthday && new Intl.DateTimeFormat().format(user.birthday)}`
-      )
-    ).toBeInTheDocument();
+    expect(screen.getByText(`Birthday: ${user.birthday}`)).toBeInTheDocument();
   });
 
   it('Should renders the user country', () => {

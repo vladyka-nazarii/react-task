@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { validateDate, validateFile, validateName, validateRequired } from '../../utils/validation';
-import { IUser, IUserForm } from '../../interfaces/interfaces';
+import { IUserForm } from '../../interfaces/interfaces';
 import { Validation } from '../../components/Validation/Validation';
 
 import styles from './Form.module.css';
