@@ -2,10 +2,10 @@ import React from 'react';
 import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
-import { Modal } from '../components/Modal/Modal';
+import { Card } from '../components/Card/Card';
 
-describe('Modal', () => {
-  const activeCard = {
+describe('Card', () => {
+  const card = {
     id: '52848677829',
     owner: '14175138@N08',
     secret: '369921a455',
@@ -21,13 +21,13 @@ describe('Modal', () => {
   };
 
   it('Should be defined', () => {
-    expect(<Modal activeCard={activeCard} setActiveCard={() => {}} />).toBeDefined();
+    expect(<Card key={card.id} card={card} setActiveCard={() => {}} />).toBeDefined();
   });
 
-  it('Should has link', () => {
-    render(<Modal activeCard={activeCard} setActiveCard={() => {}} />);
+  it('Should has height', () => {
+    render(<Card key={card.id} card={card} setActiveCard={() => {}} />);
     expect(
-      screen.getByText('https://live.staticflickr.com/65535/52848677829_369921a455.jpg')
+      screen.getByText('EI-IFC ITA Airways | Airbus A350-941 | Miami International Airport')
     ).toBeTruthy();
   });
 });
