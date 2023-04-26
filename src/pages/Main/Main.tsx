@@ -4,7 +4,7 @@ import { Search } from '../../components/Search/Search';
 import { Cards } from '../../components/Cards/Cards';
 
 import styles from './Main.module.css';
-import { ICard } from 'interfaces/interfaces';
+import { ICard } from '../../interfaces/interfaces';
 import { Modal } from '../../components/Modal/Modal';
 
 export const Main = () => {

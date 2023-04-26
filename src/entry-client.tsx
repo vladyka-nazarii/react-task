@@ -4,9 +4,18 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import { App } from './components/App/App';
-import { store } from './redux/store';
+import { ReducerType, initStore } from './redux/store';
 
 import './index.css';
+
+type WindowInstanse = Window &
+  typeof globalThis & {
+    __PRELOADED_STATE__?: ReducerType;
+  };
+
+const store = initStore((window as WindowInstanse).__PRELOADED_STATE__);
+
+delete (window as WindowInstanse).__PRELOADED_STATE__;
 
 hydrateRoot(
   document.getElementById('root') as HTMLElement,
