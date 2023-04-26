@@ -4,12 +4,12 @@ import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
 import { Search } from '../components/Search/Search';
-import { store } from '../redux/store';
+import { initStore } from '../redux/store';
 
 describe('Search field', () => {
   it('Should be defined', () => {
     expect(
-      <Provider store={store}>
+      <Provider store={initStore()}>
         <Search />
       </Provider>
     ).toBeDefined();
@@ -17,7 +17,7 @@ describe('Search field', () => {
 
   it('Should has right placeholder', () => {
     render(
-      <Provider store={store}>
+      <Provider store={initStore()}>
         <Search />
       </Provider>
     );

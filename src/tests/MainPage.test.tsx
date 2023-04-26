@@ -4,12 +4,12 @@ import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
 import { Main } from '../pages/Main/Main';
-import { store } from '../redux/store';
+import { initStore } from '../redux/store';
 
 describe('Main Page', () => {
   it('Should be defined', () => {
     expect(
-      <Provider store={store}>
+      <Provider store={initStore()}>
         <Main />
       </Provider>
     ).toBeDefined();
@@ -17,7 +17,7 @@ describe('Main Page', () => {
 
   it('Should has search bar and cards wrapper inside', () => {
     render(
-      <Provider store={store}>
+      <Provider store={initStore()}>
         <Main />
       </Provider>
     );

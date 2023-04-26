@@ -4,12 +4,12 @@ import { Provider } from 'react-redux';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import { Form } from '../components/Form/Form';
-import { store } from '../redux/store';
+import { initStore } from '../redux/store';
 
 describe('Form', () => {
   it('Should alert errors with empty values', async () => {
     render(
-      <Provider store={store}>
+      <Provider store={initStore()}>
         <Form />
       </Provider>
     );
