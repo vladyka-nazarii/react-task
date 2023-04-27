@@ -18,3 +18,5 @@ export const initStore = (preloadedState?: PreloadedState<ReducerType>) =>
     reducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(cardsApi.middleware),
   });
+
+export const store = initStore();

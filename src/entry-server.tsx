@@ -9,7 +9,7 @@ import { cardsApi } from './redux/query/cardsQuery';
 
 export const render = async (url: string, options: RenderToPipeableStreamOptions) => {
   const store = initStore();
-  store.dispatch(cardsApi.endpoints.fetchCards.initiate('picture'));
+  store.dispatch(cardsApi.endpoints.fetchCards.initiate('pictu'));
   await Promise.all(store.dispatch(cardsApi.util.getRunningQueriesThunk()));
   const preloadedState = store.getState();
   const injectPreload = () => `

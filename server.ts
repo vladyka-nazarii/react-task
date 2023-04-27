@@ -27,14 +27,25 @@ const startServer = async () => {
       template = await vite.transformIndexHtml(url, template);
       const html = template.split('<!--ssr-outlet-->');
       const { render } = await vite.ssrLoadModule('/src/entry-server.tsx');
-      const { stream, injectPreload } = await render(url, {
+      const {
+        stream: { pipe },
+        injectPreload,
+      } = await render(url, {
         onShellReady() {
           res.write(html[0]);
-          stream.pipe(res);
+          pipe(res);
+        },
+        onShellError() {
+          res.status(500);
+          res.setHeader('content-type', 'text/html');
+          res.send('<h1>Something went wrong</h1>');
         },
         onAllReady() {
           res.write(html[1].replace('<!--preloaded-state-->', injectPreload()));
           res.end();
+        },
+        onError(err: Error) {
+          console.error(err);
         },
       });
     } catch (e) {

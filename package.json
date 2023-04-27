@@ -12,7 +12,12 @@
     "test": "vitest --coverage",
     "prepare": "husky install",
     "lint": "eslint . --ext .tsx --ext .ts",
-    "lint-fix": "eslint . --ext .tsx --ext .ts --fix"
+    "lint-fix": "eslint . --ext .tsx --ext .ts --fix",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --e2e",
+    "cypress:e2e": "npx start-server-and-test dev http-get://localhost:5173 cypress:run",
+    "cypress:report": "npx nyc report && npx nyc report --reporter=text-summary",
+    "test:cypress": "npm run cypress:e2e && npm run cypress:report"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -25,8 +30,10 @@
     "react-router-dom": "^6.9.0"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.10.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "@types/cypress__code-coverage": "^3.10.0",
     "@types/express": "^4.17.17",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
@@ -34,6 +41,8 @@
     "@typescript-eslint/parser": "^5.55.0",
     "@vitejs/plugin-react-swc": "^3.0.0",
     "@vitest/coverage-c8": "^0.29.3",
+    "cypress": "^12.11.0",
+    "cypress-vite": "^1.4.0",
     "eslint": "^8.36.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -48,10 +57,12 @@
     "jsdom": "^21.1.1",
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.4",
+    "start-server-and-test": "^2.0.0",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
     "vite-node": "^0.30.1",
     "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-istanbul": "^4.0.1",
     "vitest": "^0.29.2"
   }
 }
